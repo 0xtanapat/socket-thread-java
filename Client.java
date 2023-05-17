@@ -14,14 +14,15 @@ public class Client {
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			Scanner scanner = new Scanner(System.in);
-			String line = null;
 			
+			String line = null;
 			while (!"exit".equalsIgnoreCase(line)) {
 				line = scanner.nextLine();
 				out.println(line);
 				out.flush();
 				System.out.println("Server replied: " + in.readLine());
 			}
+			
 			scanner.close();
 			System.out.println("Close");
 		} catch (IOException e) {
