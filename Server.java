@@ -13,6 +13,7 @@ public class Server {
 		try {
 			server = new ServerSocket(port);
 			server.setReuseAddress(true);
+			
 			while (true) {
 				Socket client = server.accept();
 				System.out.println("New client connected: " + client.getInetAddress().getHostAddress());
@@ -42,25 +43,26 @@ public class Server {
 		
 		@Override
 		public void run() {
-			PrintWriter out = null;
 			BufferedReader in = null;
+			PrintWriter out = null;
 			
 			try {
-				out = new PrintWriter(clientSocket.getOutputStream(), true);
 				in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+				out = new PrintWriter(clientSocket.getOutputStream(), true);
+				
 				String line;
 				while ((line = in.readLine()) != null) {
-					System.out.printf("Sent from the client: %s\n", line);
-					out.println(line);
+					System.out.printf("Message from the client: %s\n", line);
+					out.println(line.hashCode());
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
 				try {
-					if (out != null)
-						out.close();
 					if (in != null)
 						in.close();
+					if (out != null)
+						out.close();
 					clientSocket.close();
 				} catch (IOException e) {
 					e.printStackTrace();
