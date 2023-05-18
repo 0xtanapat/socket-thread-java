@@ -23,14 +23,6 @@ public class Server {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			if (server != null) {
-				try {
-					server.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 	
@@ -57,16 +49,6 @@ public class Server {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					if (in != null)
-						in.close();
-					if (out != null)
-						out.close();
-					clientSocket.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 	}
