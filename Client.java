@@ -24,7 +24,7 @@ public class Client {
 			}
 			
 			scanner.close();
-			System.out.println("Close");
+			System.out.println("Closed");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
